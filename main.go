@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"os"
 	"runtime"
 
 	"github.com/gin-gonic/gin"
@@ -40,11 +39,7 @@ func StartGin() {
 	router.POST("/room-post/:roomid", roomPOST)
 	router.GET("/stream/:roomid", streamRoom)
 
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-	}
-	if err := router.Run(":" + port); err != nil {
+	if err := router.Run(); err != nil {
 		log.Panicf("error: %s", err)
 	}
 }
